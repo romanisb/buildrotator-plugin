@@ -8,7 +8,7 @@
     <version>2.11</version>
     <relativePath />
   </parent>
-  <artifactId>BuildRotator</artifactId>
+  <artifactId>buildrotator</artifactId>
   <version>0.1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
