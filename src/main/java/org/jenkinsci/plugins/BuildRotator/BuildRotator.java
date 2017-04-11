@@ -124,7 +124,9 @@ public class BuildRotator extends BuildDiscarder {
         if (!r.isBuilding() && !shouldKeepRun(r, lastSuccessfulBuild, lastStableBuild)) {
             if (action == Action.DELETE_BUILD) {
                 LOGGER.log(FINE, "{0} is to be removed", r);
-                r.delete();
+                if (r.getRootDir().isDirectory()) {
+                    r.delete();
+                }
             } else {
                 LOGGER.log(FINE, "{0} is to be purged of artifacts", r);
                 r.deleteArtifacts();
@@ -143,10 +145,6 @@ public class BuildRotator extends BuildDiscarder {
         }
         if (run == lastStableBuild) {
             LOGGER.log(FINER, "{0} is not to be removed or purged of artifacts because it’s the last stable build", run);
-            return true;
-        }
-        if (run.isBuilding()) {
-            LOGGER.log(FINER, "{0} is not to be removed or purged of artifacts because it’s still building", run);
             return true;
         }
         return false;
