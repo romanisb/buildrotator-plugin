@@ -32,7 +32,7 @@
     <developer>
       <id>Jimilian</id>
       <name>Akbashev Alexander</name>
-      <email>mr.akbashev@gmail.com</email>
+      <email>alexander.akbashev@here.com</email>
     </developer>
   </developers>
 
@@ -40,9 +40,8 @@
     <connection>scm:git:git://github.com/jenkinsci/buildrotator-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/buildrotator-plugin.git</developerConnection>
     <url>http://github.com/jenkinsci/buildrotator-plugin</url>
-    <tag>HEAD</tag>
   </scm>
-  
+
   <repositories>
     <repository>
       <id>repo.jenkins-ci.org</id>
