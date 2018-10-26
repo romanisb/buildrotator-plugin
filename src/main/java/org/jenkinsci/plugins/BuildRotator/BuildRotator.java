@@ -110,15 +110,20 @@ public class BuildRotator extends BuildDiscarder {
     }
 
     private void removeByNumber(Job<?, ?> job, Run lastSuccessfulBuild, Run lastStableBuild, Action action) throws IOException {
-        int lastJob = job.getLastCompletedBuild().getNumber();
-        int minNumber = lastJob - numToKeep;
-        Run r = job.getFirstBuild();
-        while (r != null) {
-            if (r.getNumber() > minNumber) {
+        Run<?, ?> lastCompletedBuild = job.getLastCompletedBuild();
+        if (lastCompletedBuild != null) {
+            int lastJob = lastCompletedBuild.getNumber();
+            int minNumber = lastJob - numToKeep;
+            Run r = job.getFirstBuild();
+            while (r != null) {
+              if (r.getNumber() > minNumber) {
                 break;
+              }
+              remove(lastSuccessfulBuild, lastStableBuild, action, r);
+              r = r.getNextBuild();
             }
-            remove(lastSuccessfulBuild, lastStableBuild, action, r);
-            r = r.getNextBuild();
+        } else {
+            LOGGER.log(FINE, "There are no builds to remove for {0}", job);
         }
     }
 
